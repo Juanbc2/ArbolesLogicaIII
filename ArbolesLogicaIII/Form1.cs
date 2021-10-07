@@ -56,7 +56,7 @@ namespace ArbolesLogicaIII
             }
             catch (Exception error)
             {
-                MessageBox.Show("Error al cargar los recorridos, por favor revise los recorridos ingresados.\n"+error);
+                MessageBox.Show("Error al cargar los recorridos, por favor revise los recorridos ingresados.\n");
             }
 
         }
@@ -92,16 +92,16 @@ namespace ArbolesLogicaIII
             int[] ain, apre;
             if (ino.Length == 0) return null;
             x = new nodoDoble(pre[0]);
-            Console.WriteLine("pre[0] es: " + pre[0]);
+            //Console.WriteLine("pre[0] es: " + pre[0]);
             List<int> aux = ino.ToList();
             k = aux.IndexOf(pre[0]);
-            Console.WriteLine("k es:" + k);
+            //Console.WriteLine("k es:" + k);
             apre = new ArraySegment<int>(pre, 1, k).ToArray();
             ain = new ArraySegment<int>(ino, 0, k).ToArray();
             x.asignaLi(reconstruyePreorden(ain, apre));
-            Console.WriteLine("test: " + (k) + " " + (ino.Length));
+            //Console.WriteLine("test: " + (k) + " " + (ino.Length));
             apre = new ArraySegment<int>(pre, k + 1, ino.Length - (k + 1)).ToArray();
-            Console.WriteLine("test: " + (k) + " " + (ino.Length));
+            //Console.WriteLine("test: " + (k) + " " + (ino.Length));
             ain = new ArraySegment<int>(ino, k + 1, ino.Length - (k + 1)).ToArray();
             x.asignaLd(reconstruyePreorden(ain, apre));
             return x;
@@ -114,16 +114,16 @@ namespace ArbolesLogicaIII
             int[] ain, apos;
             if (ino.Length == 0) return null;
             x = new nodoDoble(pos[ino.Length - 1]);
-            Console.WriteLine("pre[ini.length-1] es: " + pos[ino.Length - 1]);
+            //Console.WriteLine("pre[ini.length-1] es: " + pos[ino.Length - 1]);
             List<int> aux = ino.ToList();
             k = aux.IndexOf(pos[ino.Length - 1]);
-            Console.WriteLine("k es:" + k);
+            //Console.WriteLine("k es:" + k);
             apos = new ArraySegment<int>(pos, ino.Length - (k + 1), k).ToArray();
             ain = new ArraySegment<int>(ino, k + 1, k).ToArray();
             x.asignaLd(reconstruyePosorden(ain, apos));
-            Console.WriteLine("test: " + (k) + " " + (ino.Length));
+            //Console.WriteLine("test: " + (k) + " " + (ino.Length));
             apos = new ArraySegment<int>(pos, 0, k).ToArray();
-            Console.WriteLine("test: " + (k) + " " + (ino.Length));
+            //Console.WriteLine("test: " + (k) + " " + (ino.Length));
             ain = new ArraySegment<int>(ino, 0, k).ToArray();
             x.asignaLi(reconstruyePosorden(ain, apos));
             return x;

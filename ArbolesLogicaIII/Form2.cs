@@ -213,7 +213,8 @@ namespace ArbolesLogicaIII
                    if (izqOrDer == 1) hermano = arbol.buscarDato(arbol.getRaiz(), arbol.padre(arbol.getRaiz(), textBox1.Text), aux).retornaLd().retornaDato().ToString();
                    else if (izqOrDer == 2) hermano = arbol.buscarDato(arbol.getRaiz(), arbol.padre(arbol.getRaiz(), textBox1.Text), aux).retornaLi().retornaDato().ToString();
                }
-               catch (Exception error) { Console.WriteLine(error); }
+               catch (Exception error) { //Console.WriteLine(error); 
+               }
                hermanoLabel.Text = ("El hermano es: " + checkInfo(hermano));
                //tío
                try
@@ -221,7 +222,8 @@ namespace ArbolesLogicaIII
                    if (isIzq(arbol.padre(arbol.getRaiz(), textBox1.Text)) == 1) tio = arbol.buscarDato(arbol.getRaiz(), arbol.padre(arbol.getRaiz(), arbol.padre(arbol.getRaiz(), textBox1.Text)), aux).retornaLd().retornaDato().ToString();
                    else if (isIzq(arbol.padre(arbol.getRaiz(), textBox1.Text)) == 2) tio = arbol.buscarDato(arbol.getRaiz(), arbol.padre(arbol.getRaiz(), arbol.padre(arbol.getRaiz(), textBox1.Text)), aux).retornaLi().retornaDato().ToString();
                }
-               catch (Exception error) {Console.WriteLine(error); }
+               catch (Exception error) {//Console.WriteLine(error); 
+               }
                tioLabel.Text = ("El tío es: " + checkInfo(tio));
                int numHijos = 0;
                hijosLabel.Text = ("La cantidad de hijos es: " + (arbol.hijos(arbol.buscarDato(arbol.getRaiz(), textBox1.Text, aux), numHijos) - 1));
@@ -281,7 +283,7 @@ namespace ArbolesLogicaIII
         public void inorden(nodoDoble  r){
 		    if(r != null){
 		        inorden(r.retornaLi());
-		        Console.WriteLine(r.retornaDato());
+		        //Console.WriteLine(r.retornaDato());
 		        inorden(r.retornaLd());
             }
         }
@@ -290,13 +292,13 @@ namespace ArbolesLogicaIII
 		    if(r != null){
 		        posorden(r.retornaLi());
 		        posorden(r.retornaLd());
-                Console.WriteLine(r.retornaDato());
+                //Console.WriteLine(r.retornaDato());
             }
         }
 
         public void preorden(nodoDoble  r){
 		    if(r != null){
-                Console.WriteLine(r.retornaDato());
+                //Console.WriteLine(r.retornaDato());
 		        preorden(r.retornaLi());
 		        preorden(r.retornaLd());
             }
@@ -493,7 +495,7 @@ namespace ArbolesLogicaIII
                 aux = buscarDato(r.retornaLi(),dato,aux);
                 if (String.Compare(dato, r.retornaDato().ToString()) == 0)
                 {
-                    //Console.WriteLine("econtrado");
+                    ////Console.WriteLine("econtrado");
                     return aux = r;
                 }   
                 aux = buscarDato(r.retornaLd(),dato,aux);
