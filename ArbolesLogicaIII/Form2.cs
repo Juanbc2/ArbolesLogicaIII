@@ -14,7 +14,7 @@ namespace ArbolesLogicaIII
     {
 
         string nodos;
-        ArbolBinario arbol = new ArbolBinario();
+        ArbolBinario arbol = new ArbolBinario(); //arbol principal
 
 
         public Form2(string nodos) //si envía sólo nodos
@@ -39,7 +39,7 @@ namespace ArbolesLogicaIII
         }
 
 
-        public void crearArbolAleatorio(int rand)
+        public void crearArbolAleatorio(int rand) //crea un arbol aleatorio por medio de un loop
         {
             Random rm = new Random();
             for (int i = 0; i < rand; i++)
@@ -48,9 +48,9 @@ namespace ArbolesLogicaIII
             }
         }
 
-        public void crearArbolConNodos()
+        public void crearArbolConNodos() //crea el arbol con nodos ingresados separados por coma
         {
-            string[] nodosList = nodos.Split(',');
+            string[] nodosList = nodos.Split(','); //se separa el string de nodos ingresados en un arreglo
             for (int i = 0; i < nodosList.Length; i++)
             {
                 arbol.insertarDato(nodosList[i]);
@@ -59,7 +59,8 @@ namespace ArbolesLogicaIII
 
 
         //cargar info arbol
-        int getHojas(nodoDoble r)
+
+        int getHojas(nodoDoble r) //retorna el número de hojas  (del libro)
         {
 
             int hh = 0;
@@ -77,18 +78,18 @@ namespace ArbolesLogicaIII
             return hh;
         }
 
-        List<string> getHojasList(nodoDoble r,List<string> hojasList)
+        List<string> getHojasList(nodoDoble r,List<string> hojasList) //retorna la lista de hojas del árbol 
         {
             if (r != null)
             {
                 hojasList = getHojasList(r.retornaLi(),hojasList);
-                if(arbol.hijos(r,0)==1) hojasList.Add(r.retornaDato().ToString());
+                if(arbol.hijos(r,0)==1) hojasList.Add(r.retornaDato().ToString()); //si el nodo no tiene hijos, significa que es una hoja
                 hojasList = getHojasList(r.retornaLd(),hojasList);
             }
             return hojasList;
         }
 
-        int getGrado(nodoDoble r)
+        int getGrado(nodoDoble r)  //retorna el grado del árbol  (del libro)
         {
             int g = 0;
             if (r != null)
@@ -112,7 +113,7 @@ namespace ArbolesLogicaIII
             return g;
         }
 
-        int getAltura(nodoDoble r)
+        int getAltura(nodoDoble r) //retorna la altura del árbol  (del libro)
         {
             int altizq, altder;
             if (r == null)
@@ -132,12 +133,13 @@ namespace ArbolesLogicaIII
             return mayor(altizq, altder) + 1;
         }
 
-     	int  mayor(int a, int b){
+        int mayor(int a, int b)
+        {  //devuelve el mayor de dos números  (del libro)
 		    if (a > b)  return a;
 		    return  b;
         }
 
-        void setArbolInfo()
+        void setArbolInfo() //método para mostrar en pantalla la información del árbol
         {
             string altura = "La altura del árbol es: " + getAltura(arbol.getRaiz())+"\n";
             string grado = "El grado del árbol es: " + getGrado(arbol.getRaiz())+"\n";
@@ -163,7 +165,7 @@ namespace ArbolesLogicaIII
         //fin info arbol
 
         //info nodos
-       int isIzq(string nodo) //si es izquierdo, retorna 1, si es derecho, retorna 2, si es la raíz retorna 3
+       int isIzq(string nodo) //método para ver si el nodo es izq o der, si es izquierdo, retorna 1, si es derecho, retorna 2, si es la raíz retorna 3
         {
             nodoDoble padre= new nodoDoble("");
             padre = arbol.buscarDato(arbol.getRaiz(),arbol.padre(arbol.getRaiz(),nodo),padre);
@@ -177,15 +179,16 @@ namespace ArbolesLogicaIII
            return 3;
         }
 
-       private void button1_Click(object sender, EventArgs e)
+       private void button1_Click(object sender, EventArgs e) //método que al dar click al botón, muestra la información del nodo elegido
+        
        {
-           nodoDoble aux = new nodoDoble("");
+           nodoDoble aux = new nodoDoble(""); 
            if (arbol.buscarDato(arbol.getRaiz(), textBox1.Text, aux).retornaDato().ToString() != "")
            {
-               int izqOrDer = isIzq(textBox1.Text);
-               string padre = arbol.padre(arbol.getRaiz(), textBox1.Text);
-               string abuelo = arbol.padre(arbol.getRaiz(), arbol.padre(arbol.getRaiz(), textBox1.Text));
-               List<string> ancestros = arbol.ancestros(textBox1.Text);
+               int izqOrDer = isIzq(textBox1.Text); //dirección del nodo
+               string padre = arbol.padre(arbol.getRaiz(), textBox1.Text); // padre del nodo
+               string abuelo = arbol.padre(arbol.getRaiz(), arbol.padre(arbol.getRaiz(), textBox1.Text)); //abuelo del nodo
+               List<string> ancestros = arbol.ancestros(textBox1.Text); //lista de ancestros del nodo
                padreLabel.Text = ("el padre es: " + checkInfo(padre));
                abueloLabel.Text = ("el abuelo es: " + checkInfo(abuelo));
                if (ancestros.Count == 0) ancestrosLabel.Text = ("No tiene ancestros.");
@@ -248,14 +251,15 @@ namespace ArbolesLogicaIII
             }
         }
         // fin info nodos
-        //Fin construyeConNodos
+     //Fin construyeConNodos
 
     }
 
  
 
 
-    
+    // | Clases ArbolBinario y NodoDoble |
+    // v                                 v 
 
     public class ArbolBinario
     {
@@ -280,31 +284,7 @@ namespace ArbolesLogicaIII
             this.primero.asignaLd(primero);
         }
 
-        public void inorden(nodoDoble  r){
-		    if(r != null){
-		        inorden(r.retornaLi());
-		        //Console.WriteLine(r.retornaDato());
-		        inorden(r.retornaLd());
-            }
-        }
-
-        public void posorden(nodoDoble  r){
-		    if(r != null){
-		        posorden(r.retornaLi());
-		        posorden(r.retornaLd());
-                //Console.WriteLine(r.retornaDato());
-            }
-        }
-
-        public void preorden(nodoDoble  r){
-		    if(r != null){
-                //Console.WriteLine(r.retornaDato());
-		        preorden(r.retornaLi());
-		        preorden(r.retornaLd());
-            }
-        }
-
-        public List<string> inorden(nodoDoble r,List<string> inordenList)
+        public List<string> inorden(nodoDoble r,List<string> inordenList) //devuelve una lista con el recorrido inorden
         {
             if (r != null)
             {
@@ -315,7 +295,7 @@ namespace ArbolesLogicaIII
             return inordenList;
         }
 
-        public List<string> posorden(nodoDoble r,List<string> posordenList)
+        public List<string> posorden(nodoDoble r, List<string> posordenList)//devuelve una lista con el recorrido posorden
         {
             if (r != null)
             {
@@ -326,7 +306,7 @@ namespace ArbolesLogicaIII
             return posordenList;
         }
 
-        public List<string> preorden(nodoDoble r,List<string> preordenList)
+        public List<string> preorden(nodoDoble r, List<string> preordenList)//devuelve una lista con el recorrido preorden
         {
             if (r != null)
             {
@@ -488,7 +468,7 @@ namespace ArbolesLogicaIII
         }
 
 
-        public nodoDoble buscarDato(nodoDoble r,string dato,nodoDoble aux)
+        public nodoDoble buscarDato(nodoDoble r,string dato,nodoDoble aux) //chequea si el dato está en el árbol, de ser así, devuelve el nodo
         {
             if (r != null)
             {
@@ -512,7 +492,7 @@ namespace ArbolesLogicaIII
 
 
         //cargar info nodo
-        public string padre(nodoDoble r, string dato)
+        public string padre(nodoDoble r, string dato) //devuelve el dato del padre del nodo especificado
         {
             string d,pad;
             nodoDoble p;
@@ -553,7 +533,7 @@ namespace ArbolesLogicaIII
         }
 
 
-        public List<string> ancestros(string dato)
+        public List<string> ancestros(string dato) //devuelve la lista de ancestros del nodo
         {
             string p;
             List<string> ancestrosList = new List<string>();
@@ -572,7 +552,7 @@ namespace ArbolesLogicaIII
             return ancestrosList;
         }
 
-        public int hijos(nodoDoble r,int numHijos)
+        public int hijos(nodoDoble r,int numHijos) //devuelve el número de hijos del nodo
         {
             if (r != null)
             {

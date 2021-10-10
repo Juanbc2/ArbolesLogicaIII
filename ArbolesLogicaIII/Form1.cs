@@ -27,7 +27,7 @@ namespace ArbolesLogicaIII
         {
         }
 
-        private void button1_Click(object sender, EventArgs e) //ingresado 
+        private void button1_Click(object sender, EventArgs e) //ingresada la lista de nodos separadas por comas
         {
             fm2 = new Form2(textBox1.Text);
             fm2.ShowDialog();
@@ -70,7 +70,7 @@ namespace ArbolesLogicaIII
 
         //Construir con recorridos
 
-        void construyeConRecorridos(int[] ino, int[] ord, bool isPre)
+        void construyeConRecorridos(int[] ino, int[] ord, bool isPre) //construye los recorridos (del libro)
         {//inorden y preorden
             nodoDoble raiz;
             if (isPre)
@@ -85,7 +85,7 @@ namespace ArbolesLogicaIII
         }
 
 
-        nodoDoble reconstruyePreorden(int[] ino, int[] pre)
+        nodoDoble reconstruyePreorden(int[] ino, int[] pre)  //reconstruye el arbol dado inorden y preorden (del libro)
         {
             nodoDoble x;
             int k;
@@ -107,7 +107,7 @@ namespace ArbolesLogicaIII
             return x;
         }
 
-        nodoDoble reconstruyePosorden(int[] ino, int[] pos)
+        nodoDoble reconstruyePosorden(int[] ino, int[] pos) //reconstruye el arbol dado inorden y posorden (del libro)
         {
             nodoDoble x;
             int k;
